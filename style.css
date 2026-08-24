@@ -1,0 +1,564 @@
+/* SECR S&T Knowledge Portal — walkthrough.
+   Palette follows the product itself: warm cream paper, saffron accent,
+   Indian Railways emblem red. Light by default, with a dark variant for
+   viewers whose OS asks for one. */
+:root {
+  --bg: #f4f1ea;
+  --surface: #fffdf8;
+  --surface-2: #faf7f0;
+  --border: #e4ddce;
+  --border-strong: #d6ccb8;
+  --text: #2a2620;
+  --muted: #7d7466;
+  --accent: #bf6a1a;
+  --accent-soft: rgba(191, 106, 26, 0.1);
+  --accent-line: rgba(191, 106, 26, 0.35);
+  --rail-red: #c62828;
+  --shadow: 0 1px 3px rgba(60, 50, 35, .06), 0 12px 32px rgba(60, 50, 35, .09);
+  --shadow-lg: 0 4px 10px rgba(60, 50, 35, .07), 0 24px 56px rgba(60, 50, 35, .14);
+  --shadow-hover: 0 10px 28px rgba(60, 50, 35, .13);
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --ease: cubic-bezier(.16, .8, .24, 1);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #17150f; --surface: #201d16; --surface-2: #1b1812;
+    --border: #35301f; --border-strong: #4a422d;
+    --text: #ece5d6; --muted: #9c9384;
+    --accent: #e08a30; --accent-soft: rgba(224,138,48,.14);
+    --accent-line: rgba(224,138,48,.4); --rail-red: #ef6f6f;
+    --shadow: 0 1px 3px rgba(0,0,0,.5), 0 12px 32px rgba(0,0,0,.4);
+    --shadow-lg: 0 4px 10px rgba(0,0,0,.5), 0 28px 64px rgba(0,0,0,.5);
+    --shadow-hover: 0 12px 30px rgba(0,0,0,.5);
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: var(--sans); line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+code {
+  font-family: var(--mono); font-size: .9em; background: var(--accent-soft);
+  padding: .1em .35em; border-radius: 4px;
+}
+
+/* ── nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: .75rem clamp(1rem, 4vw, 3rem);
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  transition: box-shadow .25s var(--ease);
+}
+.nav.scrolled { box-shadow: 0 4px 20px rgba(30, 25, 15, .08); }
+.nav-brand {
+  display: flex; align-items: center; gap: .55rem;
+  font-family: var(--serif); font-weight: 700; color: var(--text);
+  text-decoration: none; white-space: nowrap;
+}
+.nav-logo { width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0; }
+/* overflow-x:auto is a safety net for a narrow window where nine links don't
+   fit — it lets the row scroll rather than wrap or clip. The scrollbar CHROME
+   itself is hidden; the scrolling still works via trackpad/drag, it just
+   doesn't leave a visible bar sitting in the nav. */
+.nav-links {
+  display: flex; gap: 1.3rem; margin-left: auto; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a {
+  position: relative;
+  color: var(--muted); text-decoration: none; font-size: .85rem;
+  white-space: nowrap; padding: .35rem 0;
+  transition: color .18s ease;
+}
+.nav-links a::after {
+  content: ""; position: absolute; left: 0; right: 100%; bottom: -1px; height: 2px;
+  background: var(--accent); border-radius: 2px;
+  transition: right .22s var(--ease);
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a.active { color: var(--accent); font-weight: 600; }
+.nav-links a.active::after { right: 0; }
+@media (max-width: 720px) { .nav-links { display: none; } }
+
+/* ── hero ── */
+.hero {
+  position: relative; overflow: hidden;
+  /* No width cap here, matching the full-width cards below — the 900px cap
+     this replaced was narrowing the WHOLE hero (headline, metrics row, glow)
+     down to a centered column, not just the body text. The body paragraph
+     stays readable regardless: .lede below carries its own 42em cap, so it
+     does not stretch into uncomfortably long lines just because its
+     container got wider. */
+  padding: clamp(3rem, 9vw, 6rem) clamp(1rem, 4vw, 2.5rem) 3.5rem;
+  text-align: center;
+}
+.hero::before, .hero::after {
+  content: ""; position: absolute; z-index: 0; pointer-events: none;
+  border-radius: 50%; filter: blur(70px);
+}
+.hero::before {
+  width: 420px; height: 420px; top: -140px; left: 6%;
+  background: var(--accent); opacity: .28;
+}
+.hero::after {
+  width: 360px; height: 360px; top: 20px; right: 4%;
+  background: var(--rail-red); opacity: .16;
+}
+.hero > * { position: relative; z-index: 1; }
+
+.kicker, .sec-kicker {
+  font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--rail-red); margin: 0 0 1rem;
+}
+.hero h1 {
+  font-family: var(--serif); font-weight: 700; margin: 0 0 1.2rem;
+  font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.15; letter-spacing: -.01em;
+}
+.hero h1 em { color: var(--accent); font-style: italic; }
+.lede {
+  font-size: clamp(1rem, 2.2vw, 1.15rem); color: var(--muted);
+  max-width: 42em; margin: 0 auto;
+}
+
+/* Hero entrance — a short staggered rise-and-fade on first paint, not tied
+   to scroll (the hero is already on screen when the page loads). */
+.hero-in { opacity: 0; transform: translateY(14px); animation: hero-rise .7s var(--ease) forwards; }
+.hero-in-2 { animation-delay: .08s; }
+.hero-in-3 { animation-delay: .16s; }
+.hero-in-4 { animation-delay: .24s; }
+@keyframes hero-rise { to { opacity: 1; transform: none; } }
+
+.metrics {
+  list-style: none; display: flex; flex-wrap: wrap; justify-content: center;
+  gap: .6rem; padding: 0; margin: 2.5rem auto 1.2rem;
+}
+/* Sized so all five sit on ONE row at desktop width. Five cards wrapping to
+   4 + 1 reads as a layout bug rather than a deliberate set. */
+.metrics li {
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: .8rem .85rem; min-width: 7rem;
+  flex: 1 1 7rem; max-width: 11rem;
+  box-shadow: 0 1px 2px rgba(60,50,35,.04);
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s ease;
+}
+.metrics li::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--rail-red));
+  opacity: .85;
+}
+.metrics li:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-line);
+}
+.metrics b {
+  display: block; font-family: var(--serif); font-size: 1.7rem;
+  line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums;
+}
+.metrics span {
+  display: block; font-size: .66rem; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .04em; margin-top: .25rem;
+  line-height: 1.35;
+}
+.hero-note { font-size: .82rem; color: var(--muted); margin: 0; }
+
+.scroll-cue {
+  display: inline-flex; margin-top: 2.6rem;
+  width: 1.6rem; height: 2.6rem; border: 2px solid var(--border-strong);
+  border-radius: 999px; position: relative; text-decoration: none;
+}
+.scroll-cue span {
+  position: absolute; top: .4rem; left: 50%; width: .3rem; height: .3rem;
+  margin-left: -.15rem; border-radius: 50%; background: var(--accent);
+  animation: cue-drop 1.6s ease-in-out infinite;
+}
+@keyframes cue-drop {
+  0%   { transform: translateY(0);    opacity: 1; }
+  70%  { transform: translateY(.9rem); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 0; }
+}
+
+/* ── main / feature cards ── */
+/* Full width, no cap — cards now span the browser viewport edge-to-edge
+   (minus the padding gutter below), rather than sitting in a centered column
+   with dark bands on either side. The one trade-off: the product screenshots
+   are captured at ~1920px CSS width, so on a monitor wider than that the
+   image is stretched slightly past its native resolution and loses a little
+   sharpness. That's an accepted cost of true full width rather than an
+   oversight — cap main again (e.g. max-width: 1800px) if it becomes visible
+   on the displays this actually gets viewed on. */
+main { max-width: none; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
+
+.feature {
+  --pad: clamp(1.75rem, 4vw, 3rem);
+  position: relative; overflow: hidden;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; box-shadow: var(--shadow);
+  padding: var(--pad);
+  margin: 0 0 clamp(1.75rem, 4vw, 2.75rem);
+}
+.feature::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--rail-red));
+  opacity: .8;
+}
+
+.feature-head {
+  display: grid; grid-template-columns: auto 1fr; align-items: start;
+  gap: 1.4rem; margin-bottom: 1.9rem;
+}
+.feature-head-plain { grid-template-columns: 1fr; }
+.feature-num {
+  font-family: var(--serif); font-weight: 700; line-height: 1;
+  font-size: clamp(2.3rem, 5.5vw, 3.6rem);
+  color: var(--accent); opacity: .16;
+}
+@supports (-webkit-text-stroke: 1px black) {
+  .feature-num { color: transparent; -webkit-text-stroke: 1.5px var(--accent); opacity: .5; }
+}
+.feature h2 {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(1.4rem, 3.2vw, 1.9rem); margin: 0 0 .7rem; line-height: 1.25;
+}
+.sec-lede { color: var(--muted); max-width: 46em; margin: 0; }
+@media (max-width: 640px) {
+  .feature-head { grid-template-columns: 1fr; gap: .4rem; }
+  .feature-num { display: none; }
+}
+
+/* screenshots framed as a captured browser window — dots + a fake address
+   bar — so they read as "this is the real, running product" rather than a
+   loose crop dropped onto the page. */
+/* Bleeds past the card's own side padding to reach the card's full width —
+   the previous version was inset by --pad on both sides on top of main's own
+   cap, so a screenshot of a 1920px-wide UI was rendering under 900px. This
+   is the fix that actually restores legibility; widening main alone would
+   not have, since the card padding was eating the gain. */
+.shot-frame {
+  margin: 0 calc(-1 * var(--pad));
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border-strong); box-shadow: var(--shadow-lg);
+  background: var(--surface-2);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.shot-frame:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover), var(--shadow-lg); }
+.shot-chrome {
+  display: flex; align-items: center; gap: .4rem;
+  padding: .6rem .8rem;
+  background: var(--surface-2); border-bottom: 1px solid var(--border);
+}
+.dot { width: .62rem; height: .62rem; border-radius: 50%; flex-shrink: 0; }
+.dot-r { background: #ff5f57; } .dot-y { background: #febc2e; } .dot-g { background: #28c840; }
+.shot-frame img { display: block; width: 100%; height: auto; }
+
+/* ── annotated diagram (desktop) ─────────────────────────────────────────
+   A self-contained explainer panel, not a screenshot with things floating
+   on top of it. Its own fixed light surface regardless of this page's
+   theme — it is explaining the PRODUCT's screenshot, which is always the
+   light UI, so a dark-mode reader must not get a dark label vanishing
+   against a cream image.
+
+   .callout-shot (the <figure>) reserves the padding; .callout-panel is a
+   ZERO-padding box whose width/height end up being defined purely by
+   .callout-img (margin: 0 23% narrows it to a centred 54%-wide column,
+   height follows from the image's own aspect ratio). That is what makes
+   the coordinate system below work: every percentage — the SVG's viewBox,
+   the labels' left/top — resolves against that same box, so a point
+   measured as "31% across the SCREENSHOT" converts with one fixed formula:
+       panel% = 23 + screenshot% × 0.54
+   (23 for the left gutter, 0.54 because the image occupies 54% of the
+   panel). All six line endpoints below were computed that way from pixel
+   coordinates measured on the real qa.png (1918×973) — see the comment in
+   index.html for how each target was found. */
+/* No padding: the image bleeds to the card's own edges exactly like every
+   other .shot-frame on the page. The 2rem/1.5rem inset this replaced left
+   the diagram visibly narrower than its neighbours. */
+.callout-shot {
+  padding: 0;
+  background: #f4f1ea; border: 1px solid #d6ccb8;
+}
+.callout-panel { position: relative; padding: 0; }
+/* width MUST be restated here. `.shot-frame img { width: 100% }` above still
+   applies to this image, and `margin: 0 23%` only shifts the box — it does
+   not shrink it. The result was a 100%-wide image starting at 23%, running
+   off to 123% of the panel and sliding underneath the right-hand labels.
+   54% + two 23% gutters = 100%, so these two values must stay in sync with
+   the 23/0.54 conversion formula documented above. */
+/* `.shot-frame .callout-img`, not a bare `.callout-img`: the rule above is
+   `.shot-frame img` (specificity 0,1,1) and this figure carries BOTH
+   classes, so a single-class selector loses the cascade no matter how far
+   down the file it sits — source order only decides ties.
+
+   FULL width. An earlier version shrank this to 68% to make room for label
+   gutters either side, which kept the labels clear but rendered the UI text
+   inside the screenshot too small to read — defeating the point of showing
+   it. The screenshot has ~30% of blank margin on its own left and ~31% on
+   its right (measured on qa.png: content occupies x 588-1328 of 1918), so
+   the labels can simply live IN those margins at full size. */
+.shot-frame .callout-img {
+  display: block; width: 100%; height: auto; margin: 0;
+}
+
+.callout-lines {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+}
+.callout-lines line {
+  /* non-scaling-stroke means these are read as roughly literal CSS pixels,
+     NOT user units warped by the viewBox's (very anisotropic) scale — 1.2
+     is a crisp, visible line; the .18 first tried here was sub-pixel and
+     essentially invisible. */
+  stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 5 4;
+  stroke-linecap: round; vector-effect: non-scaling-stroke;
+}
+
+.callout {
+  position: absolute; width: 26%;
+  font-size: .72rem; line-height: 1.4; color: #2a2620;
+}
+.callout b { display: block; font-family: var(--serif); font-size: .82rem; margin-bottom: .2rem; }
+.callout span { color: #7d7466; }
+/* Left-column labels are RIGHT-aligned so their text ends flush against the
+   point each dashed line starts from. Left-aligning them (the previous
+   version) pinned every label to the card's outer edge and left a wide,
+   ragged gap between the words and their own connector — they read as
+   stranded in the margin rather than attached to anything. The right column
+   needs no such trick: left-aligned text there already starts flush against
+   where its lines arrive. */
+.callout-l { text-align: right; }
+.callout-r { text-align: left; }
+
+/* ── narrow-viewport fallback ──
+   Six precisely-pointed labels do not survive a phone-width render — the
+   gutters they live in shrink faster than the text does. Below 700px the
+   whole diagram panel is replaced with a compact caption list instead of
+   trying to force the same layout smaller. */
+.callout-caption { display: none; }
+/* 1000px, not 700: the labels are positioned as a % of the IMAGE's height,
+   and that height shrinks with the viewport. Below ~1000px the two closest
+   pairs (targets only ~5-6% apart) are separated by fewer pixels than a
+   two-line label is tall, so they overlap. The caption list takes over. */
+@media (max-width: 1000px) {
+  .callout-shot { padding: 1rem; }
+  .callout-lines, .callout { display: none; }
+  /* image is already full width; nothing to reset here */
+  .callout-caption {
+    display: grid; gap: .35rem; margin: 1rem 0 0;
+    font-size: .78rem; line-height: 1.5; color: #7d7466;
+  }
+  .callout-caption b { color: #2a2620; }
+}
+
+/* the dark-mode screenshot's own chrome bar reads as "dark" regardless of
+   the viewer's theme — it is showing dark mode, not adapting to one. */
+.shot-chrome-dark { background: #1b1812; border-bottom-color: #35301f; }
+
+.notice {
+  margin-top: 1.5rem; padding: 1.05rem 1.3rem;
+  background: var(--accent-soft); border-left: 3px solid var(--accent);
+  border-radius: 12px; font-size: .92rem;
+}
+.notice b {
+  display: block; font-size: .72rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .3rem;
+}
+
+/* ── phones ── */
+/* Capped and centred. These screenshots are 1290×2796 — a 2.17:1 portrait
+   ratio — so across a full-width card each device rendered ~500px wide and
+   over 1000px tall, filling the viewport on its own. Constraining the ROW
+   (rather than the images) keeps all three on screen together, which is the
+   entire point of showing them side by side. ~230px each is close to a
+   phone's real physical width, so the set reads as three handsets rather
+   than three oversized posters. */
+.phones {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.75rem;
+  max-width: 760px; margin: 0 auto;
+}
+.phone { margin: 0; }
+.phone-shell {
+  position: relative; overflow: hidden;
+  /* Bezel scaled down with the device — an 8px frame that looked right at
+     500px wide reads as a thick plastic border at 230px. */
+  border-radius: 24px; border: 6px solid var(--surface-2);
+  outline: 1px solid var(--border-strong); outline-offset: -1px;
+  box-shadow: var(--shadow-lg);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.phone-shell:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover), var(--shadow-lg); }
+/* The notch must be FLUSH with the top of the screen area — it reads as the
+   bezel dipping down into the display. At `top: 4px` (the previous value) a
+   sliver of the screenshot showed above it, so it floated as a detached
+   black pill instead of connecting to the frame. Same colour as the border
+   for the same reason: they are meant to be one continuous piece. */
+.phone-shell::before {
+  content: ""; position: absolute; z-index: 2; top: 0; left: 50%;
+  /* Deliberately small. These screenshots have no status-bar strip of their
+     own — the app header starts at pixel row 0 — so anything larger eats the
+     emblem and title. A shallow pill reads as a device cue without
+     obscuring the UI it is framing. */
+  transform: translateX(-50%); width: 22%; height: 8px;
+  background: var(--surface-2); border-radius: 0 0 7px 7px;
+}
+.phone-shell img { display: block; width: 100%; height: auto; }
+.phone figcaption {
+  text-align: center; font-size: .78rem; color: var(--muted);
+  margin-top: .7rem; text-transform: uppercase; letter-spacing: .07em;
+}
+
+/* ── pipeline ── */
+.pipeline {
+  counter-reset: step; list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.05rem;
+}
+.pipeline li {
+  counter-increment: step; position: relative;
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.3rem 1.25rem 1.3rem;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s ease;
+}
+.pipeline li:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-hover);
+  border-color: var(--accent-line);
+}
+.pipeline li::before {
+  content: counter(step);
+  display: flex; align-items: center; justify-content: center;
+  width: 2.15rem; height: 2.15rem; margin-bottom: .85rem;
+  border-radius: 50%; background: var(--accent-soft); color: var(--accent);
+  border: 1px solid var(--accent-line);
+  font-family: var(--serif); font-weight: 700; font-size: .95rem;
+}
+.pipeline b { display: block; margin-bottom: .25rem; font-size: 1.02rem; }
+.pipeline span { font-size: .88rem; color: var(--muted); line-height: 1.5; }
+
+/* ── footer ── */
+/* Footer matches the card system used by every section above, rather than
+   sitting as loose text on the page background — it was the one block that
+   still read as an afterthought. Full width like main, since the cards it
+   now mirrors are full width too. */
+footer {
+  padding: 1rem clamp(1rem, 4vw, 2.5rem) 3.5rem;
+  font-size: .88rem;
+}
+footer p { margin: 0; }
+
+.foot-card {
+  position: relative; overflow: hidden;
+  display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: start;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 20px; box-shadow: var(--shadow);
+  padding: clamp(1.6rem, 3.5vw, 2.5rem);
+}
+.foot-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--rail-red));
+  opacity: .8;
+}
+
+.foot-id { display: flex; gap: 1rem; align-items: start; }
+.foot-logo { flex-shrink: 0; border-radius: 50%; }
+.foot-id > div > b {
+  display: block; font-family: var(--serif); font-size: 1.12rem; line-height: 1.3;
+}
+.foot-id > div > span {
+  display: block; color: var(--rail-red); font-size: .78rem; font-weight: 600;
+  margin-top: .15rem;
+}
+.fine { color: var(--muted); font-size: .8rem; margin-top: .75rem !important; }
+
+.access-note {
+  padding: 1.05rem 1.25rem;
+  background: color-mix(in srgb, var(--rail-red) 7%, transparent);
+  border: 1px solid color-mix(in srgb, var(--rail-red) 22%, transparent);
+  border-radius: 14px; font-size: .84rem; color: var(--text);
+}
+.access-note b {
+  display: flex; align-items: center; gap: .4rem;
+  font-size: .72rem; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--rail-red); margin-bottom: .6rem;
+}
+.access-note b svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.access-note ul {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; gap: .5rem;
+}
+.access-note li { position: relative; padding-left: 1rem; line-height: 1.5; }
+.access-note li::before {
+  content: ""; position: absolute; left: 0; top: .55em;
+  width: .32rem; height: .32rem; border-radius: 50%;
+  background: var(--rail-red); opacity: .65;
+}
+.access-foot {
+  margin-top: .85rem !important; padding-top: .7rem;
+  border-top: 1px solid color-mix(in srgb, var(--rail-red) 18%, transparent);
+  color: var(--muted); font-size: .78rem;
+}
+
+.foot-base {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .6rem;
+  margin-top: 1.2rem; padding: 0 .3rem;
+  color: var(--muted); font-size: .76rem;
+}
+
+@media (max-width: 820px) {
+  .foot-card { grid-template-columns: 1fr; }
+}
+
+/* asset not added yet — show the expected path rather than a broken icon,
+   whatever kind of frame is wrapping it (screenshot chrome, phone bezel,
+   the phone bezel). */
+[data-file].missing img,
+[data-file].missing .shot-chrome,
+[data-file].missing .phone-shell { display: none; }
+[data-file].missing::before {
+  content: "screenshot pending — " attr(data-file);
+  display: flex; align-items: center; justify-content: center;
+  min-height: 220px; padding: 2rem; text-align: center;
+  border: 2px dashed var(--border-strong); border-radius: 14px;
+  color: var(--muted); font-size: .85rem; font-family: var(--mono);
+}
+.phone.missing { display: flex; flex-direction: column; }
+
+/* ── scroll reveal ── */
+.reveal { opacity: 0; transform: translateY(26px); transition: opacity .65s var(--ease), transform .65s var(--ease); }
+.reveal.in-view { opacity: 1; transform: none; }
+/* Staggered rise for the cards inside a revealed group — the group itself
+   fades in as one trigger, but its children arrive a beat apart so the page
+   reads as an unfolding sequence rather than a single flat pop-in. */
+.reveal.in-view .metrics li,
+.reveal.in-view .pipeline li {
+  animation: child-rise .55s var(--ease) backwards;
+}
+.metrics li:nth-child(1), .pipeline li:nth-child(1) { animation-delay: .03s; }
+.metrics li:nth-child(2), .pipeline li:nth-child(2) { animation-delay: .09s; }
+.metrics li:nth-child(3), .pipeline li:nth-child(3) { animation-delay: .15s; }
+.metrics li:nth-child(4), .pipeline li:nth-child(4) { animation-delay: .21s; }
+.metrics li:nth-child(5), .pipeline li:nth-child(5) { animation-delay: .27s; }
+.pipeline li:nth-child(6) { animation-delay: .33s; }
+@keyframes child-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .reveal, .hero-in { opacity: 1 !important; transform: none !important; }
+  .scroll-cue span { display: none; }
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+@media (max-width: 720px) {
+  .hero::before, .hero::after { display: none; }
+}

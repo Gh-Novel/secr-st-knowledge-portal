@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SECR S&amp;T Knowledge Portal — Walkthrough</title>
+<meta name="description" content="Grounded RAG over Indian Railways Signalling &amp; Telecommunication manuals. Every answer cited to its clause; refuses rather than guesses.">
+<link rel="stylesheet" href="style.css?v=23">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav-brand" href="#top">
+    <img class="nav-logo" src="assets/logo.png" alt="" aria-hidden="true" width="26" height="26">
+    SECR S&amp;T Knowledge Portal
+  </a>
+  <div class="nav-links">
+    <a href="#answer">Answer</a>
+    <a href="#context">Context</a>
+    <a href="#source">Source</a>
+    <a href="#internet">Internet</a>
+    <a href="#refusal">Refusal</a>
+    <a href="#saved">Saved</a>
+    <a href="#theme">Theme</a>
+    <a href="#mobile">Mobile</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <p class="kicker hero-in">South East Central Railway · S&amp;T (Telecom) — Phase-1 Pilot</p>
+  <h1 class="hero-in hero-in-2">Answers from the manual.<br><em>Never from the model.</em></h1>
+  <p class="lede hero-in hero-in-3">
+    A plain-language question, answered strictly from the official Signalling &amp;
+    Telecommunication manuals — cited to the exact clause, traceable to the printed
+    page, and refused outright when the manuals do not contain the answer.
+  </p>
+
+  <ul class="metrics reveal hero-in hero-in-4">
+    <li><b data-count="3239" data-format="comma">0</b><span>passages indexed</span></li>
+    <li><b data-count="100" data-format="pct">0</b><span>retrieval hit@5</span></li>
+    <li><b data-count="97" data-format="pct">0</b><span>citation exactness</span></li>
+    <li><b data-count="0" data-format="pct">0</b><span>uncited claims</span></li>
+    <li><b data-count="221" data-format="plain">0</b><span>test questions</span></li>
+  </ul>
+
+  <p class="hero-note hero-in hero-in-4">
+    Indexed corpus — IRSEM 2021 · Indian Railways Telecom Manual 2021 · Model SOP 2018
+  </p>
+
+  <a class="scroll-cue" href="#answer" aria-label="Scroll to the first example">
+    <span></span>
+  </a>
+</header>
+
+<main>
+
+  <!-- 1 ─────────────────────────────────────────────── -->
+  <section id="answer" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">01</span>
+      <div>
+        <p class="sec-kicker">Grounded answer</p>
+        <h2>Every claim carries its clause</h2>
+        <p class="sec-lede">
+          The answer is assembled only from passages actually retrieved from the manuals.
+          Each numbered marker is a live citation naming the document and clause it came
+          from — nothing in the text is unattributed.
+        </p>
+      </div>
+    </div>
+    <!-- Annotated diagram — its own fixed-light panel, independent of this
+         page's dark/light theme, because it is explaining a screenshot that
+         is ALWAYS the product's light UI. Labels live in dedicated gutters
+         either side of the image (not floated on top of it, which covered
+         real text). The image is FULL width and the labels sit in the wide
+         blank margins the screenshot already has — content occupies only
+         x 588-1328 of its 1918px, leaving ~30% clear on each side. Because
+         the image fills the panel exactly, one SVG unit here IS one percent
+         of the screenshot, so these coordinates are measured pixel positions
+         divided by 1918 (x) and 555 (y) — not eyeballed. The asset is
+         qa-annotated.png, qa.png cropped to 1918×555: the original carries a
+         ~430px empty band between the citations row and the composer, which
+         made this card enormously tall for no content —
+         each line's end sits at the edge of its real UI element, not on top
+         of any text. Desktop only; narrow viewports get .callout-caption. -->
+    <figure class="shot-frame callout-shot" data-file="assets/screens/qa-annotated.png">
+      <div class="callout-panel">
+        <img class="callout-img" src="assets/screens/qa-annotated.png" alt="A cited answer with numbered citation markers">
+        <svg class="callout-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <line x1="29"   y1="19" x2="50.2" y2="21.1" />
+          <line x1="29"   y1="34" x2="30.5" y2="32.6" />
+          <line x1="29"   y1="71" x2="30.2" y2="71.5" />
+          <line x1="70.5" y1="30" x2="54.0" y2="32.8" />
+          <line x1="70.5" y1="45" x2="68.3" y2="41.3" />
+          <line x1="70.5" y1="85" x2="68.3" y2="85.0" />
+        </svg>
+        <!-- Each label's `top` sits close to its own target's y — a short,
+             near-flat line stays in blank margin; a label positioned purely
+             for even vertical spacing (the first version of this) forces a
+             steep diagonal that cuts across unrelated text on its way down.
+             Descriptions are kept to one short line ON PURPOSE: two of the
+             six targets sit only ~5% apart in the source image, and a
+             two-line description was tall enough to collide with its
+             neighbour at typical render heights. -->
+        <div class="callout callout-l" style="left:6%; width:23%; top:15%;">
+          <b>Your question</b>
+          <span>Shown back exactly as typed</span>
+        </div>
+        <div class="callout callout-l" style="left:6%; width:23%; top:30%;">
+          <b>Answer from the manuals</b>
+          <span>The direct, cited answer</span>
+        </div>
+        <div class="callout callout-l" style="left:6%; width:23%; top:67%;">
+          <b>Also check the internet</b>
+          <span>Optional, separately labelled</span>
+        </div>
+        <div class="callout callout-r" style="left:71%; top:26%;">
+          <b>Every claim carries its clause</b>
+          <span>The marker links to its source</span>
+        </div>
+        <div class="callout callout-r" style="left:71%; top:41%;">
+          <b>Document &amp; clause details</b>
+          <span>Manual, clause number and page</span>
+        </div>
+        <div class="callout callout-r" style="left:71%; top:81%;">
+          <b>Citations section</b>
+          <span>Every source used, listed</span>
+        </div>
+      </div>
+      <p class="callout-caption">
+        <span><b>Your question</b> — asked, shown back as typed.</span>
+        <span><b>Answer from the manuals</b> — the direct, cited answer.</span>
+        <span><b>Also check the internet</b> — an optional web lookup.</span>
+        <span><b>Every claim carries its clause</b> — marker links to its source.</span>
+        <span><b>Document &amp; clause details</b> — manual, clause, page.</span>
+        <span><b>Citations section</b> — every source used, listed.</span>
+      </p>
+    </figure>
+    <div class="notice">
+      <b>What to notice</b>
+      The markers <code>[1]</code>, <code>[2]</code> are not decoration — each resolves to a
+      document, a clause reference and a page number. An answer that cannot be cited is
+      never shown.
+    </div>
+  </section>
+
+  <!-- 2 ─────────────────────────────────────────────── -->
+  <section id="context" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">02</span>
+      <div>
+        <p class="sec-kicker">Conversation context</p>
+        <h2>Follow-ups resolve against the conversation</h2>
+        <p class="sec-lede">
+          "What about the pipes?" is not a question a search index can answer. The prior turns
+          rewrite the elliptical follow-up into a standalone question <em>before</em> retrieval
+          runs — so the follow-up is grounded just as strictly as the first question was.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame" data-file="assets/screens/context.png">
+      <div class="shot-chrome" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/context.png" alt="A follow-up question resolved using earlier turns">
+    </figure>
+    <div class="notice">
+      <b>The design constraint</b>
+      History feeds <em>query rewriting only</em>. It never reaches the answer prompt, so a
+      long conversation can never smuggle an unsourced claim into a later answer.
+    </div>
+  </section>
+
+  <!-- 3 ─────────────────────────────────────────────── -->
+  <section id="source" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">03</span>
+      <div>
+        <p class="sec-kicker">The printed page</p>
+        <h2>The citation chain ends at the paper</h2>
+        <p class="sec-lede">
+          Tapping a citation opens the actual rendered page of the manual, with the exact lines
+          the answer drew from highlighted on it. The reader verifies against the document
+          itself rather than trusting the summary.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame" data-file="assets/screens/source-page.png">
+      <div class="shot-chrome" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/source-page.png" alt="The original manual page with the cited lines highlighted">
+    </figure>
+    <div class="notice">
+      <b>Why it matters here</b>
+      The manual remains authoritative. The portal assists retrieval — it does not replace
+      the document, and it is built so a reader can always check it.
+    </div>
+  </section>
+
+  <!-- 4 ─────────────────────────────────────────────── -->
+  <section id="internet" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">04</span>
+      <div>
+        <p class="sec-kicker">Optional web lookup</p>
+        <h2>Clearly separated from the manuals</h2>
+        <p class="sec-lede">
+          Where the corpus is silent, the reader may opt in to a web search. The result is
+          fenced, labelled, and never mixed into the cited answer — and untrusted sources such
+          as social media pages are filtered out before they can be quoted.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame" data-file="assets/screens/internet.png">
+      <div class="shot-chrome" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/internet.png" alt="Web search results, visually fenced from the grounded answer">
+    </figure>
+    <div class="notice">
+      <b>What to notice</b>
+      The dashed border and the footer line — <em>"Not verified against the indexed manuals.
+      The cited answer above is the authoritative one."</em> Provenance stays visible at a glance.
+    </div>
+  </section>
+
+  <!-- 5 ─────────────────────────────────────────────── -->
+  <section id="refusal" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">05</span>
+      <div>
+        <p class="sec-kicker">Refusal</p>
+        <h2>"Not found" is a feature, not a failure</h2>
+        <p class="sec-lede">
+          Asked something the manuals do not cover, the portal declines and says so — naming the
+          documents it searched and the nearest related clauses. It does not improvise, and it
+          does not dress a guess up as an answer.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame" data-file="assets/screens/not-found.png">
+      <div class="shot-chrome" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/not-found.png" alt="A refusal: not found in the knowledge base">
+    </figure>
+    <div class="notice">
+      <b>Measured, not asserted</b>
+      Every out-of-corpus adversarial question in the evaluation suite was refused, including
+      multi-turn traps that establish a legitimate topic and then pivot to one outside the manuals.
+    </div>
+  </section>
+
+  <!-- 6 ─────────────────────────────────────────────── -->
+  <section id="saved" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">06</span>
+      <div>
+        <p class="sec-kicker">Saved answers</p>
+        <h2>Keep an answer, keep its evidence</h2>
+        <p class="sec-lede">
+          A saved answer stores its full citations — document, clause, page and passage — not a
+          pointer back to the chat. It survives deleting the conversation it came from, and its
+          citations stay fully interactive.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame" data-file="assets/screens/saved-answers.png">
+      <div class="shot-chrome" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/saved-answers.png" alt="The saved answers library">
+    </figure>
+  </section>
+
+  <!-- 6b ────────────────────────────────────────────── -->
+  <section id="theme" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">07</span>
+      <div>
+        <p class="sec-kicker">Light and dark</p>
+        <h2>Built for a signal cabin, not just a desk</h2>
+        <p class="sec-lede">
+          Dark mode is a full theme, not an inverted filter — sidebar, source viewer and
+          highlight colours are all restyled for low-light reading, with the choice
+          remembered once a reader picks it.
+        </p>
+      </div>
+    </div>
+    <figure class="shot-frame shot-frame-dark" data-file="assets/screens/dark-mode.png">
+      <div class="shot-chrome shot-chrome-dark" aria-hidden="true">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+      </div>
+      <img src="assets/screens/dark-mode.png" alt="The portal in dark mode, sidebar and source viewer open">
+    </figure>
+  </section>
+
+  <!-- 7 ─────────────────────────────────────────────── -->
+  <section id="mobile" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">08</span>
+      <div>
+        <p class="sec-kicker">In the field</p>
+        <h2>The same answers, on a phone</h2>
+        <p class="sec-lede">
+          S&amp;T staff need the manuals at the equipment, not only at a desk. The interface is
+          built for a one-handed phone viewport — the same engine, the same citations, the same
+          refusals.
+        </p>
+      </div>
+    </div>
+    <div class="phones">
+      <figure class="phone" data-file="assets/screens/mobile-qa.png">
+        <div class="phone-shell">
+          <img src="assets/screens/mobile-qa.png"
+               alt="Portal on a phone — a cited answer with its citations block">
+        </div>
+        <figcaption>Cited answer</figcaption>
+      </figure>
+      <figure class="phone" data-file="assets/screens/mobile-source-page.png">
+        <div class="phone-shell">
+          <img src="assets/screens/mobile-source-page.png"
+               alt="Portal on a phone — the original manual page with the cited lines highlighted">
+        </div>
+        <figcaption>Source page</figcaption>
+      </figure>
+      <figure class="phone" data-file="assets/screens/mobile-side-bar.png">
+        <div class="phone-shell">
+          <img src="assets/screens/mobile-side-bar.png"
+               alt="Portal on a phone — the chats sidebar with saved answers and settings">
+        </div>
+        <figcaption>Chats &amp; saved</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- how it works -->
+  <section id="how" class="feature how reveal">
+    <div class="feature-head feature-head-plain">
+      <div>
+        <p class="sec-kicker">Under the hood</p>
+        <h2>How an answer is built</h2>
+      </div>
+    </div>
+    <ol class="pipeline">
+      <li><b>Rewrite</b><span>Follow-ups resolved into standalone questions using recent turns.</span></li>
+      <li><b>Retrieve</b><span>Dense embeddings and BM25 keyword search run in parallel, fused, then reranked by a cross-encoder.</span></li>
+      <li><b>Gate</b><span>Calibrated thresholds decide answer or refuse — before any generation cost is spent.</span></li>
+      <li><b>Judge</b><span>A sufficiency check asks whether the passages actually answer the question, not merely share its topic.</span></li>
+      <li><b>Generate &amp; verify</b><span>The draft is checked back against its sources; unsupported sentences are repaired or the answer is discarded.</span></li>
+      <li><b>Cite</b><span>Every claim is bound to a clause, a page, and the lines on it.</span></li>
+    </ol>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-card">
+    <div class="foot-id">
+      <img class="foot-logo" src="assets/logo.png" alt="" width="52" height="52">
+      <div>
+        <b>SECR S&amp;T Knowledge Portal</b>
+        <span>Phase-1 pilot · South East Central Railway · S&amp;T (Telecom)</span>
+        <p class="fine">
+          Indexed corpus consists of publicly available signalling and telecommunication
+          manuals. The source document remains authoritative; the portal assists retrieval
+          and does not replace the manual. Screenshots show the running pilot.
+        </p>
+      </div>
+    </div>
+
+    <!-- Broken out of the single dense paragraph it used to be: three
+         separate facts (what is withheld, what is pending, who may sign in)
+         that a reader wants to scan, not read. -->
+    <aside class="access-note">
+      <b>
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="4" y="10.5" width="16" height="10" rx="2.5"
+                stroke="currentColor" stroke-width="1.9"/>
+          <path d="M8 10.5V7.5a4 4 0 1 1 8 0v3" stroke="currentColor"
+                stroke-width="1.9" stroke-linecap="round"/>
+        </svg>
+        Access
+      </b>
+      <ul>
+        <li>Source code and system architecture are not published here, under the terms of the engagement.</li>
+        <li>Full deployment is in progress. Once live, the link will be added to this page.</li>
+        <li>Access will be restricted to South East Central Railway staff sign-in.</li>
+      </ul>
+      <p class="access-foot">This walkthrough is a preview, not a public tool.</p>
+    </aside>
+  </div>
+
+  <div class="foot-base">
+    <span>IRSEM 2021 · Indian Railways Telecom Manual 2021 · Model SOP 2018</span>
+    <span>3,239 passages indexed · 221 test questions</span>
+  </div>
+</footer>
+
+<script>
+// Mark figures whose asset has not been added yet, so the page reads as a
+// checklist during assembly instead of showing broken-image icons. Any
+// element carrying data-file — a screenshot's <figure> or a phone shot — is
+// the thing that gets the "missing" treatment; the asset
+// itself may be nested inside decorative chrome/bezel wrapper divs, so the
+// search is by descendant, not direct child.
+for (const el of document.querySelectorAll('[data-file] img')) {
+  const holder = el.closest('[data-file]');
+  const fail = () => holder.classList.add('missing');
+  el.addEventListener('error', fail);
+  if (el.complete && !el.naturalWidth) fail();
+}
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// SCROLL REVEAL — each .reveal card fades and rises into place once, the
+// first time it crosses the lower third of the viewport. Skipped entirely
+// under reduced-motion; the CSS default for .reveal is already the visible
+// end state, so doing nothing here is enough.
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('in-view');
+      io.unobserve(entry.target);
+    }
+  }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+} else {
+  document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'));
+}
+
+// ACTIVE NAV LINK — tracks whichever section currently owns the middle band
+// of the viewport, rather than the top edge, so the link updates roughly
+// when a reader would say "I'm looking at Context now."
+{
+  const links = [...document.querySelectorAll('.nav-links a')];
+  const map = new Map(links.map((a) => [a.getAttribute('href').slice(1), a]));
+  const sections = [...map.keys()].map((id) => document.getElementById(id)).filter(Boolean);
+  if ('IntersectionObserver' in window && sections.length) {
+    const navIO = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        const link = map.get(entry.target.id);
+        if (!link) continue;
+        links.forEach((a) => a.classList.remove('active'));
+        link.classList.add('active');
+      }
+    }, { rootMargin: '-42% 0px -54% 0px', threshold: 0 });
+    sections.forEach((s) => navIO.observe(s));
+  }
+}
+
+// NAV SHADOW ON SCROLL — a purely cosmetic cue that the page has moved,
+// throttled to one check per animation frame so it costs nothing on scroll.
+{
+  const nav = document.querySelector('.nav');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      nav.classList.toggle('scrolled', window.scrollY > 6);
+      ticking = false;
+    });
+  }, { passive: true });
+}
+
+// METRIC COUNT-UP — runs once, when the hero metrics row enters view. Each
+// <b> carries the real target in data-count and how to render it in
+// data-format, so the animation never has to parse the display text.
+if (!reduceMotion) {
+  const metricsList = document.querySelector('.metrics');
+  const nums = metricsList ? [...metricsList.querySelectorAll('b[data-count]')] : [];
+  const render = (n, format) => {
+    if (format === 'pct') return `${n}%`;
+    if (format === 'comma') return n.toLocaleString('en-US');
+    return String(n);
+  };
+  const run = () => {
+    for (const el of nums) {
+      const target = parseInt(el.dataset.count, 10);
+      const format = el.dataset.format;
+      const duration = 900;
+      const t0 = performance.now();
+      const step = (now) => {
+        const p = Math.min(1, (now - t0) / duration);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = render(Math.round(target * eased), format);
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+  };
+  if (metricsList && 'IntersectionObserver' in window) {
+    const metricIO = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        run();
+        metricIO.disconnect();
+      }
+    }, { threshold: 0.4 });
+    metricIO.observe(metricsList);
+  } else if (metricsList) {
+    run();
+  }
+} else {
+  // Reduced motion: paint the final values directly, no animation.
+  document.querySelectorAll('.metrics b[data-count]').forEach((el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const format = el.dataset.format;
+    el.textContent = format === 'pct' ? `${target}%`
+      : format === 'comma' ? target.toLocaleString('en-US')
+      : String(target);
+  });
+}
+</script>
+</body>
+</html>
