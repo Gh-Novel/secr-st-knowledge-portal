@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SECR S&amp;T Knowledge Portal — Walkthrough</title>
 <meta name="description" content="Grounded RAG over Indian Railways Signalling &amp; Telecommunication manuals. Every answer cited to its clause; refuses rather than guesses.">
-<link rel="stylesheet" href="style.css?v=23">
+<link rel="stylesheet" href="style.css?v=25">
 </head>
 <body>
 
@@ -23,6 +23,8 @@
     <a href="#saved">Saved</a>
     <a href="#theme">Theme</a>
     <a href="#mobile">Mobile</a>
+    <a href="#beyond">Beyond RAG</a>
+    <a href="#evaluation">Evaluation</a>
   </div>
 </nav>
 
@@ -335,6 +337,105 @@
     </div>
   </section>
 
+  <!-- 9 ─────────────────────────────────────────────── -->
+  <section id="beyond" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">09</span>
+      <div>
+        <p class="sec-kicker">Engineering</p>
+        <h2>What makes it more than a standard RAG</h2>
+        <p class="sec-lede">
+          Retrieval plus a language model is the easy part. Almost all of the work went
+          into the failure modes — the cases where a plausible-sounding answer is worse
+          than no answer at all.
+        </p>
+      </div>
+    </div>
+
+    <ul class="caps">
+      <li>
+        <b>Exact-identifier handling</b>
+        <span>Clause references resolve by exact lookup rather than semantic similarity.</span>
+        <em>Embeddings and query rewriting both mangle precise identifiers, and a citation
+        wrong by one digit is simply a wrong citation.</em>
+      </li>
+      <li>
+        <b>Pre-generation refusal</b>
+        <span>Out-of-corpus questions are rejected on retrieval quality, before the model
+        is ever invoked.</span>
+        <em>The question never reaches a model that could improvise over it — and the
+        refusal costs nothing to produce.</em>
+      </li>
+      <li>
+        <b>Structural citation integrity</b>
+        <span>Citation labels are assembled from index metadata; the model emits only the
+        reference markers.</span>
+        <em>A fabricated clause reference is structurally impossible rather than merely
+        discouraged by a prompt.</em>
+      </li>
+    </ul>
+
+    <div class="notice">
+      <b>An unexpected finding</b>
+      Smaller instruction-following models outperformed larger reasoning models on this
+      task. The stronger models produced more elaborate, more loosely-attributed answers —
+      which the citation checks then rejected. Capability made them worse at grounded
+      extraction, not better.
+    </div>
+  </section>
+
+  <!-- 10 ────────────────────────────────────────────── -->
+  <section id="evaluation" class="feature reveal">
+    <div class="feature-head">
+      <span class="feature-num" aria-hidden="true">10</span>
+      <div>
+        <p class="sec-kicker">Evaluation</p>
+        <h2>Measured, not asserted</h2>
+        <p class="sec-lede">
+          The portal is scored against a standing evaluation harness of
+          <b>221 questions and conversation turns across six suites</b>, including a
+          43-question gold benchmark scored for retrieval, answer accuracy and citation
+          exactness. Every defect ever found is locked by a regression case, so a fix
+          cannot silently reopen.
+        </p>
+      </div>
+    </div>
+
+    <div class="eval-grid">
+      <table class="eval-table">
+        <thead><tr><th>Metric</th><th>Result</th><th>What it measures</th></tr></thead>
+        <tbody>
+          <tr><td>Retrieval hit@5</td><td><b>100%</b></td><td>The clause that answers the question is among the top five passages retrieved</td></tr>
+          <tr><td>Answer accuracy</td><td><b>97%</b></td><td>The generated answer matches the expected substance of the clause</td></tr>
+          <tr><td>Citation exactness</td><td><b>97%</b></td><td>The clause reference cited is the correct one</td></tr>
+          <tr><td>Not-found precision</td><td><b>100%</b></td><td>Every refusal was genuinely outside the corpus — no real question wrongly refused</td></tr>
+          <tr><td>Not-found recall</td><td><b>100%</b></td><td>Every out-of-corpus question was refused rather than answered</td></tr>
+          <tr><td>Uncited claims</td><td><b>0%</b></td><td>No sentence asserted without a citation behind it</td></tr>
+          <tr><td>Latency (p50)</td><td><b>5.6s</b></td><td>End to end, question asked to answer complete</td></tr>
+        </tbody>
+      </table>
+
+      <aside class="eval-suites">
+        <b>The six suites</b>
+        <ul>
+          <li><span>Gold benchmark</span> retrieval, accuracy and citation scoring</li>
+          <li><span>Adversarial conversations</span> multi-turn traps that establish a legitimate topic, then pivot outside the corpus</li>
+          <li><span>Conversation bank</span> real multi-turn usage, including elliptical follow-ups</li>
+          <li><span>Chapter-focused bank</span> sustained questioning confined to one subject area</li>
+          <li><span>Vague-follow-up probes</span> questions too underspecified to answer safely</li>
+          <li><span>Regression suite</span> every defect ever found, locked</li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="notice notice-caveat">
+      <b>What these numbers do not say</b>
+      Safety, collision and not-found handling are 100% of small case counts — that is
+      <em>no known failures</em>, not a solved class of problem. The honest reading is that
+      nothing has broken yet in the cases tested, not that nothing can.
+    </div>
+  </section>
+
   <!-- how it works -->
   <section id="how" class="feature how reveal">
     <div class="feature-head feature-head-plain">
@@ -345,7 +446,7 @@
     </div>
     <ol class="pipeline">
       <li><b>Rewrite</b><span>Follow-ups resolved into standalone questions using recent turns.</span></li>
-      <li><b>Retrieve</b><span>Dense embeddings and BM25 keyword search run in parallel, fused, then reranked by a cross-encoder.</span></li>
+      <li><b>Retrieve</b><span>Semantic and keyword search run together, then the combined results are re-scored for relevance.</span></li>
       <li><b>Gate</b><span>Calibrated thresholds decide answer or refuse — before any generation cost is spent.</span></li>
       <li><b>Judge</b><span>A sufficiency check asks whether the passages actually answer the question, not merely share its topic.</span></li>
       <li><b>Generate &amp; verify</b><span>The draft is checked back against its sources; unsupported sentences are repaired or the answer is discarded.</span></li>

@@ -444,6 +444,76 @@ main { max-width: none; padding: 1rem clamp(1rem, 4vw, 2.5rem) 0; }
 .pipeline b { display: block; margin-bottom: .25rem; font-size: 1.02rem; }
 .pipeline span { font-size: .88rem; color: var(--muted); line-height: 1.5; }
 
+/* ── capability list (section 09) ── */
+.caps {
+  list-style: none; padding: 0; margin: 0;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.05rem;
+}
+.caps li {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.3rem 1.25rem;
+  transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s ease;
+}
+.caps li:hover {
+  transform: translateY(-4px); box-shadow: var(--shadow-hover);
+  border-color: var(--accent-line);
+}
+.caps b {
+  display: block; font-family: var(--serif); font-size: 1.02rem; margin-bottom: .4rem;
+}
+.caps span { display: block; font-size: .9rem; line-height: 1.5; }
+.caps em {
+  display: block; margin-top: .7rem; padding-top: .7rem;
+  border-top: 1px solid var(--border);
+  font-style: normal; font-size: .84rem; color: var(--muted); line-height: 1.5;
+}
+
+/* ── evaluation (section 10) ── */
+.eval-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(1.25rem, 3vw, 2.25rem);
+  align-items: start;
+}
+@media (max-width: 900px) { .eval-grid { grid-template-columns: 1fr; } }
+
+.eval-table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+.eval-table th {
+  text-align: left; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted); font-weight: 700; padding: 0 .8rem .6rem 0;
+  border-bottom: 1px solid var(--border-strong);
+}
+.eval-table td {
+  padding: .7rem .8rem .7rem 0; border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.eval-table tr:last-child td { border-bottom: 0; }
+.eval-table td:nth-child(2) { white-space: nowrap; }
+.eval-table td:nth-child(2) b {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--accent);
+}
+.eval-table td:nth-child(3) { color: var(--muted); font-size: .84rem; line-height: 1.5; }
+
+.eval-suites {
+  background: var(--surface-2); border: 1px solid var(--border);
+  border-radius: 14px; padding: 1.2rem 1.3rem;
+}
+.eval-suites > b {
+  display: block; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .8rem;
+}
+.eval-suites ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; }
+.eval-suites li { font-size: .82rem; color: var(--muted); line-height: 1.45; }
+.eval-suites li span {
+  display: block; color: var(--text); font-weight: 600; font-size: .87rem;
+}
+
+/* The caveat reads as a limitation, not a feature — railway red rather than
+   the accent used by every other callout on the page. */
+.notice-caveat {
+  background: color-mix(in srgb, var(--rail-red) 7%, transparent);
+  border-left-color: var(--rail-red);
+}
+.notice-caveat b { color: var(--rail-red); }
+
 /* ── footer ── */
 /* Footer matches the card system used by every section above, rather than
    sitting as loose text on the page background — it was the one block that
