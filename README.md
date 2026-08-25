@@ -1,7 +1,5 @@
 # SECR S&T Knowledge Portal — Walkthrough
 
-**Live page → https://gh-novel.github.io/secr-st-knowledge-portal/**
-
 A visual walkthrough of the Phase-1 pilot of an AI knowledge portal built for
 **South East Central Railway, S&T (Telecom)** — a grounded retrieval system over
 the Indian Railways signalling and telecommunication manuals, where every answer
@@ -26,6 +24,19 @@ improvising.
 
 Indexed corpus — IRSEM 2021 · Indian Railways Telecom Manual 2021 · Model SOP 2018.
 
+## What the walkthrough covers
+
+| Section | Shows |
+|---|---|
+| **Grounded answer** | An annotated diagram of a full answer — question, cited response, clause details, citations list |
+| **Conversation context** | An elliptical follow-up resolved against earlier turns before retrieval runs |
+| **The printed page** | A citation opened onto the real manual page, with the cited lines highlighted |
+| **Optional web lookup** | An opt-in web search, fenced and labelled, never mixed into the cited answer |
+| **Refusal** | Questions outside the corpus declined rather than answered |
+| **Saved answers** | An answer kept together with its full citations |
+| **Light and dark** | Dark mode as a full theme, not an inverted filter |
+| **In the field** | The same engine and citations on a phone |
+
 ## How an answer is built
 
 1. **Rewrite** — elliptical follow-ups resolved into standalone questions using recent turns.
@@ -48,8 +59,8 @@ assets/screens/       screenshots of the running pilot
 assets/logo.png       Indian Railways emblem
 ```
 
-Deployed with GitHub Pages from the `main` branch. No build step — it is plain
-HTML and CSS.
+Plain HTML and CSS with no build step and no dependencies — open `index.html`
+in a browser to view it.
 
 ## Access
 
