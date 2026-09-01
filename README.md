@@ -6,6 +6,8 @@ the Indian Railways signalling and telecommunication manuals, where every answer
 is cited to its exact clause and the engine returns *"not found"* rather than
 guessing.
 
+check here : https://gh-novel.github.io/secr-st-knowledge-portal/
+
 ## What it does
 
 Staff ask a question in plain language. The portal answers **only** from the
